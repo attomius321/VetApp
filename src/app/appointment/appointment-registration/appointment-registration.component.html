@@ -1,0 +1,44 @@
+<!--export interface Appointment {-->
+<!--id: string;-->
+<!--animal: string;-->
+<!--timestamp: number;-->
+<!--doc: string;-->
+<!--diagnostic: string;-->
+<!--status: number;-->
+<!--}-->
+
+<div class="container">
+  <div class="row">
+    <div class="form_bg">
+      <form #regForm='ngForm' (ngSubmit)="register(regForm)" >
+        <h2 class="text-center">Appointment Registration Page</h2>
+        <br/>
+        <div class="form-group">
+          <label for="animal">Animal: </label> <br />
+          <input id="animal" type="text" class="form-control" placeholder="Animal type" name="animal" ngModel >
+        </div>
+        <div class="form-group">
+          <label for="timestamp">Timestamp: </label><br />
+          <input id="timestamp" type="number" class="form-control"  placeholder="timestamp" name="timpestamp" ngModel >
+        </div>
+        <div class="form-group">
+          <label for="doc">Doctor: </label><br />
+          <input type="text" id="doc" class="form-control" id="address" placeholder="doc" name="doc" ngModel>
+        </div>
+        <div class="form-group">
+          <label for="diagnostic">Diagnostic: </label><br />
+          <input type="text" id="diagnostic" class="form-control" id="diagnostic" placeholder="diag" name="diagnostic" ngModel>
+        </div>
+        <div class="form-group">
+          <label for="status">Status: </label><br />
+          <input type="number" id="status" class="form-control" id="status" placeholder="status" name="status" ngModel>
+        </div>
+
+        <br/>
+        <div class="align-center">
+          <button type="submit" class="btn btn-default" id="register"  >Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+.my-container {
+  height: 500px;
+  overflow: auto;
+}
+
+mat-label{
+  padding: 10px;
+  font-size: 25px;
+}
+
+.mat-row{
+  height: auto;
+}
+
+.mat-header-cell{
+  padding: 10px;
+}
+.mat-cell{
+  padding: 20px 10px;
+}
+
+input{
+  padding-left: 10px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+  overflow: hidden;
+  text-align: left;
+}
+
+.text {
+  padding-left: 1rem;
+}
+
+th{
+  font-size: 20px;
+  padding: 20px;
+}
+
+th:focus{
+  text-decoration: none;
+}
+

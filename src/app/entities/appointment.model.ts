@@ -1,8 +1,8 @@
 export interface Appointment {
   id: string;
   animal: string;
-  timestamp: number;
+  unix: number;
   doc: string;
   diagnostic: string;
-  status: number;
+  status: string;
 }

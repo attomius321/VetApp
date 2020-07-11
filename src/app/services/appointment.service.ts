@@ -1,5 +1,5 @@
 import {Injectable, InjectionToken, Provider} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, DocumentChangeAction} from "@angular/fire/firestore";
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import {Appointment} from "../entities/appointment.model";
 import {Observable} from "rxjs";
 import * as firebase from 'firebase';
@@ -7,11 +7,13 @@ import * as firebase from 'firebase';
 import DocumentReference = firebase.firestore.DocumentReference;
 import {ajaxPost} from "rxjs/internal-compatibility";
 import {map} from "rxjs/operators";
-import App = firebase.app.App;
+
 
 export interface IAppointmentService {
 
   getAppointments();
+
+  getAppointmentById(id: string);
 
   createAppointment(appointment: Appointment);
 
@@ -24,16 +26,16 @@ export interface IAppointmentService {
 @Injectable()
 export class AppointmentService implements IAppointmentService{
 
-  appointments: Observable<Appointment[]>
+  appointments: Observable<Array<Appointment>>
 
   appointmentsCollection: AngularFirestoreCollection<Appointment>
 
   constructor(private firestore: AngularFirestore) {
-    this.appointmentsCollection = firestore.collection<Appointment>('appointments')
-
-    this.appointments = this.appointmentsCollection.snapshotChanges().pipe(
+    this.appointmentsCollection = firestore.collection<Appointment>('appointments', ref => ref.orderBy('unix', 'desc'));
+    this.appointments = this.appointmentsCollection.snapshotChanges().
+    pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Appointment;
+        const data = (a.payload.doc.data() as Appointment);
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
@@ -42,6 +44,10 @@ export class AppointmentService implements IAppointmentService{
 
   getAppointments(){
     return this.appointments;
+  }
+
+  getAppointmentById(id: string){
+    return this.firestore.collection('appointments').doc(id).valueChanges();
   }
 
   createAppointment(appointment: Appointment){
@@ -61,6 +67,7 @@ export class AppointmentService implements IAppointmentService{
     delete appointment.id;
     this.firestore.doc('appointments/' + appointment.id).update(appointment);
   }
+
 }
 
 export const APPOINTMENT_SERVICE = new InjectionToken<IAppointmentService>('APPOINTMENT_SERVICE');

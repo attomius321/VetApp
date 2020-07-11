@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Appointment} from "../../../entities/appointment.model";
+import {APPOINTMENT_SERVICE, IAppointmentService} from "../../../services/appointment.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-appointment-details',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppointmentDetailsComponent implements OnInit {
 
-  constructor() { }
+  appointment: Appointment;
+
+  constructor(@Inject(APPOINTMENT_SERVICE) private appService: IAppointmentService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.appService.getAppointmentById(this.activatedRoute.snapshot.params['id']).subscribe(
+      appointment => this.appointment = appointment
+    )
   }
 
 }

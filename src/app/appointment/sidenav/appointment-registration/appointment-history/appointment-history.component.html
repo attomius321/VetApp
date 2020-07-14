@@ -1,0 +1,37 @@
+ <div class="my-container mat-elevation-z8" style="background-color: white;">
+   <div style="display: flex; align-items: center; justify-content: center">
+     <h2 class="text-center" >Istoric programari din trecut - fata de ora actuala</h2>
+   </div>
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="created" id="content-table">
+      <ng-container matColumnDef="animal">
+        <th mat-header-cell *matHeaderCellDef>Nume Animal</th>
+        <td mat-cell *matCellDef="let appointment">{{appointment.animal}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="doc" >
+        <th mat-header-cell *matHeaderCellDef>Nume Doctor</th>
+        <td mat-cell *matCellDef="let appointment"> Dr. {{appointment.doc}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status" >
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let appointment"> {{appointment.status}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="unix" >
+        <th mat-header-cell *matHeaderCellDef>Data si ora</th>
+        <td mat-cell *matCellDef="let appointment"> {{appointment.unix | date: 'yyyy-MM-dd | HH:mm'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="diagnostic" >
+        <th mat-header-cell *matHeaderCellDef>Diagnostic</th>
+        <td mat-cell *matCellDef="let appointment"> {{appointment.diagnostic}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+
+

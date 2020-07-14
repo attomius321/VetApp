@@ -51,10 +51,11 @@ export class AppointmentService implements IAppointmentService{
   }
 
   createAppointment(appointment: Appointment){
+    const param = JSON.parse(JSON.stringify(appointment));
     return new Promise<any>((resolve, reject) =>{
       this.firestore
         .collection('appointments')
-        .add(appointment)
+        .add(param)
         .then(res => {}, err => reject(err));
     });
   }

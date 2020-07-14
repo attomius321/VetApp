@@ -1,9 +1,13 @@
-<div class="container">
-  <div style="display: flex; justify-content: center; align-items: center">
-    <h2 style="margin-top: 20px">Programarile dumneavoastra</h2>
+<div style="margin: 10px; margin-top: -5px">
+  <div style="display: flex;">
+    <div>
+      <h2 style="margin-top: 20px">Programarile dumneavoastra</h2>
+    </div>
+    <div style="margin-left: auto">
+      <button (click)="goToAdd()" style="margin-top: 20px; radius: 20px" id="add" name="add" class="btn"><i class="material-icons left" style="margin-right: 5px">add_circle_outline</i>Adauga programare</button>
+    </div>
   </div>
   <app-appointment-table></app-appointment-table>
-  <button (click)="goToAdd()" style="margin-top: 20px; radius: 20px" id="add" name="add" class="btn"><i class="material-icons left" style="margin-right: 5px">add_circle_outline</i>Adauga programare</button>
 </div>
 
 

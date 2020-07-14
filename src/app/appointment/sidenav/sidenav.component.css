@@ -32,3 +32,16 @@ mat-nav-list {
      `<body>` to be our scrolling element for mobile layouts. */
   flex: 1 0 auto;
 }
+
+.paralelog{
+  position: fixed;
+  z-index: -10;
+  top:0%;
+  width: 3000px;
+  height: 1000px;
+  display: inline-block;
+  background: gray;
+  border: 1px solid black;
+  transform: skewX(-75deg);
+  opacity: 0.2;
+}

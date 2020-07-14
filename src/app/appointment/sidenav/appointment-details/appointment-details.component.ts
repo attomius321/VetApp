@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Appointment} from "../../../entities/appointment.model";
-import {APPOINTMENT_SERVICE, IAppointmentService} from "../../../services/appointment.service";
+import {APPOINTMENT_SERVICE, IAppointmentService} from "../../../services/appointment/appointment.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({

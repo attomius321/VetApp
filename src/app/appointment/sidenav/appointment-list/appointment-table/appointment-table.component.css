@@ -1,5 +1,5 @@
 .my-container {
-  height: 500px;
+  height: 600px;
   overflow: auto;
 }
 
@@ -17,6 +17,7 @@ mat-label{
 }
 .mat-cell{
   padding: 20px 10px;
+  max-width: 200px;
 }
 
 input{
@@ -43,3 +44,14 @@ th:focus{
   text-decoration: none;
 }
 
+.created{
+  color: lightseagreen;
+}
+
+.confirmed{
+  color: green;
+}
+
+.ended{
+  color: darkred;
+}

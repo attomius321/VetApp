@@ -1,3 +1,45 @@
 label{
   font-size: 20px;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.error {
+  margin-top: 10px;
+  font-size: .8rem;
+  color: #ee6e73 !important;
+  position: relative;
+  top: -20px;
+
+}
+
+.error > label {
+  color: #ee6e73 !important;
+  position: absolute;
+  top: 2px;
+}
+
+.paralelog{
+  position: fixed;
+  z-index: -10;
+  top:0%;
+  width: 3000px;
+  height: 1000px;
+  display: inline-block;
+  background: #E8E8E8;
+  transform: skewX(-75deg);
+  opacity: 0.2;
+}
+
+a:hover {
+  cursor: pointer;
+}

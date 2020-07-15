@@ -1,12 +1,13 @@
 import {Injectable, InjectionToken, Provider} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
-import {Appointment} from "../entities/appointment.model";
+import {Appointment} from "../../entities/appointment.model";
 import {Observable} from "rxjs";
 import * as firebase from 'firebase';
 
 import DocumentReference = firebase.firestore.DocumentReference;
 import {ajaxPost} from "rxjs/internal-compatibility";
 import {map} from "rxjs/operators";
+import {ToastrModule, ToastrService} from "ngx-toastr";
 
 
 export interface IAppointmentService {
@@ -15,11 +16,13 @@ export interface IAppointmentService {
 
   getAppointmentById(id: string);
 
+  getAppointmentsByAnimal(name: string);
+
   createAppointment(appointment: Appointment);
 
   deleteAppointment(appointment: Appointment);
 
-  updateAppointment(appointment: Appointment);
+  updateAppointment(appointment: Appointment, id: string);
 
 }
 
@@ -30,7 +33,8 @@ export class AppointmentService implements IAppointmentService{
 
   appointmentsCollection: AngularFirestoreCollection<Appointment>
 
-  constructor(private firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore,
+              private toastr: ToastrService) {
     this.appointmentsCollection = firestore.collection<Appointment>('appointments', ref => ref.orderBy('unix', 'desc'));
     this.appointments = this.appointmentsCollection.snapshotChanges().
     pipe(
@@ -50,13 +54,22 @@ export class AppointmentService implements IAppointmentService{
     return this.firestore.collection('appointments').doc(id).valueChanges();
   }
 
+  getAppointmentsByAnimal(animal: string){
+    return this.firestore.collection('appointments').ref.where("animal", "==", animal).get();
+  }
+
   createAppointment(appointment: Appointment){
     const param = JSON.parse(JSON.stringify(appointment));
     return new Promise<any>((resolve, reject) =>{
       this.firestore
         .collection('appointments')
         .add(param)
-        .then(res => {}, err => reject(err));
+        .then(res => {
+          this.toastr.success("Programare adaugata cu succes!")
+        },
+              err => {
+            reject(err),
+            this.toastr.error("Adaugare esuata!")});
     });
   }
 
@@ -64,9 +77,13 @@ export class AppointmentService implements IAppointmentService{
     this.firestore.doc('appointments/' + appointment.id).delete();
   }
 
-  updateAppointment(appointment: Appointment){
+  updateAppointment(appointment: Appointment, id: string){
     delete appointment.id;
-    this.firestore.doc('appointments/' + appointment.id).update(appointment);
+    this.firestore.doc('appointments/' + id).update(appointment).then(
+      res => {
+        this.toastr.success("Programare editata cu succes!")
+      },
+    );
   }
 
 }

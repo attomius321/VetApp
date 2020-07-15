@@ -2,7 +2,7 @@ import {Injectable, NgZone} from '@angular/core';
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestore";
 import {Router} from "@angular/router";
 import {AngularFireAuth} from "@angular/fire/auth";
-import {User} from "../entities/user.model";
+import {User} from "../../entities/user.model";
 import {Observable, of} from "rxjs";
 import {switchMap} from "rxjs/operators";
 import {auth} from "firebase";

@@ -1,5 +1,6 @@
 label{
   font-size: 20px;
+  color: slategray;
 }
 
 input::-webkit-outer-spin-button,
@@ -11,6 +12,10 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+::placeholder{
+  color: gainsboro;
 }
 
 .error {
@@ -26,18 +31,6 @@ input[type=number] {
   color: #ee6e73 !important;
   position: absolute;
   top: 2px;
-}
-
-.paralelog{
-  position: fixed;
-  z-index: -10;
-  top:0%;
-  width: 3000px;
-  height: 1000px;
-  display: inline-block;
-  background: #E8E8E8;
-  transform: skewX(-75deg);
-  opacity: 0.2;
 }
 
 a:hover {

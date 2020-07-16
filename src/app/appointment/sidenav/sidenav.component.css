@@ -23,9 +23,6 @@ h1.example-app-name {
   flex: 1;
 }
 
-mat-nav-list {
-  width: 20vw;
-}
 
 .example-is-mobile .example-sidenav-container {
   /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
@@ -33,15 +30,6 @@ mat-nav-list {
   flex: 1 0 auto;
 }
 
-.paralelog{
-  position: fixed;
-  z-index: -10;
-  top:0%;
-  width: 3000px;
-  height: 1000px;
-  display: inline-block;
-  background: gray;
-  border: 1px solid black;
-  transform: skewX(-75deg);
-  opacity: 0.2;
+a {
+
 }

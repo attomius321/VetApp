@@ -3,9 +3,9 @@ import {NgForm} from "@angular/forms";
 import {Appointment} from "../../../entities/appointment.model";
 import {APPOINTMENT_SERVICE, IAppointmentService} from "../../../services/appointment/appointment.service";
 import {ToastrService} from "ngx-toastr";
-import {INavigationService, NAVIGATION_SERVICE} from "../../../services/navigation/navigation.service";
 import {AppointmentForm} from "./appointment-form.model";
 import {MatTableDataSource} from "@angular/material/table";
+import {TimeConverterService} from "../../../services/time-convertor/time-convertor.service";
 
 @Component({
   selector: 'app-appointment-registration',
@@ -23,21 +23,23 @@ export class AppointmentRegistrationComponent implements OnInit {
   public appointmentList: Array<Appointment> = [];
   public minDate: Date;
   private date: number;
-  private time: number;
   private state = 0;
 
 
 
   constructor(@Inject(APPOINTMENT_SERVICE) private appService: IAppointmentService,
               private toastr: ToastrService,
-              @Inject(NAVIGATION_SERVICE) private nav: INavigationService) {
+              private timeConverterService: TimeConverterService) {
+
     this.minDate = new Date();
+
     this.appointment = new class implements AppointmentForm {
       animal: string;
       data: string;
       doc: string;
       hour: number;
     }
+
     this.realAppointment = new class implements Appointment {
       animal: string;
       diagnostic: string;
@@ -55,16 +57,17 @@ export class AppointmentRegistrationComponent implements OnInit {
     this.date = regForm.form.value.date.getTime();
     let split = regForm.form.value.hour.split(':');
     this.realAppointment.animal = this.appointment.animal;
-    this.realAppointment.diagnostic = "TBD";
+    this.realAppointment.diagnostic = "";
     this.realAppointment.doc = this.appointment.doc;
-    this.realAppointment.status = "CREATA";
-    this.realAppointment.unix = this.convertDateAndTime(this.date, split);
+    this.realAppointment.status = "CREATED";
+    this.realAppointment.unix = this.timeConverterService.convertTimeToUnix(this.date, split);
     this.save();
-  }
-
-  convertDateAndTime(date: number, split: number){
-    this.time = (+split[0]) * 3600 + (+split[1]) * 60;
-    return this.date + this.time * 1000;
+    this.appointment = new class implements AppointmentForm {
+      animal: string;
+      data: string;
+      doc: string;
+      hour: number;
+    }
   }
 
   save() {
@@ -98,9 +101,4 @@ export class AppointmentRegistrationComponent implements OnInit {
         err => console.log("Error getting documents", err)
       )
   }
-
-  goBack() {
-    this.nav.openAppointments();
-  }
-
 }

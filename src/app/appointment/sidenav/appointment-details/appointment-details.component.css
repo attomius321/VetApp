@@ -1,0 +1,48 @@
+label{
+  font-size: 15px;
+  color: black;
+  margin-left: 20px;
+}
+
+.disabled{
+  color: lightgray;
+}
+
+.error {
+  margin-top: 10px;
+  font-size: .8rem;
+  color: #ee6e73 !important;
+  position: relative;
+  top: -20px;
+
+}
+
+.error > label {
+  color: #ee6e73 !important;
+  position: absolute;
+  top: 2px;
+}
+
+.my-btn {
+  width: 20vw;
+  margin: 1vw 3vw 1vw 0;
+  font-size: 1vw;
+}
+
+.my-btn:last-child{
+  margin-right: 0;
+}
+
+textarea {
+  height: 100px;
+  margin-top: 10px;
+  background-color: white;
+  resize: none;
+}
+
+textarea:focus {
+  outline: none !important;
+  border-color: #4db6ac;
+  border-width: 2px;
+}
+

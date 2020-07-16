@@ -1,3 +1,76 @@
-<div *ngIf="appointment">
-  <p>{{appointment.animal}}</p>
-</div>
+<app-toolbar></app-toolbar>
+<app-paralelog></app-paralelog>
+<div class="container" style="margin-top: 20px;">
+    <form [formGroup]="appointmentFormGroup" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <div style="display: flex;justify-content: center; align-items: center">
+          <label style="margin-left: 0">Schimba status programare</label><br/>
+        </div>
+        <div style="width: 100%; display: flex; align-items: center; justify-content: center">
+          <button type="button" class="btn my-btn #1565c0 blue darken-3" (click)="changeStatus('CREATED')" [disabled]="disableButton('CREATED')">CREATED</button>
+          <button type="button" class="btn my-btn " (click)="changeStatus('CONFIRMED')" [disabled]="disableButton('CONFIRMED')">CONFIRMED</button>
+          <button type="button" class="btn my-btn #c62828 red darken-3" (click)="changeStatus('DONE')" [disabled]="disableDoneButton('DONE')">DONE</button>
+        </div>
+        <div class="error"
+             *ngIf="appointmentFormGroup.get('status').invalid && (appointmentFormGroup.get('status').dirty || appointmentFormGroup.get('status').touched)">
+          <p *ngIf="appointmentFormGroup.get('status').errors.required">Alegerea statusului este necesara</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Diagnostic</label>
+        <textarea formControlName="diagnostic" placeholder="Diagnostic" (ngModelChange)="checkDiagnostic()" [disabled]="!checkStatus('DONE')"></textarea>
+        <div class="error" style="margin-top: 20px">
+          <p *ngIf="checkDiagnostic()">Nu puteti sa treceti in DONE daca nu completati campul de diagnostic</p>
+        </div>
+      </div>
+
+      <div class="form-group" [class.disabled]="!checkStatus('CREATED')">
+        <label [class.disabled]="!checkStatus('CREATED')">Nume animal</label>
+        <input formControlName="animal" placeholder="Nume/rasa" [readOnly]="!checkStatus('CREATED')"/>
+        <div class="error"
+             *ngIf="appointmentFormGroup.get('animal').invalid && (appointmentFormGroup.get('animal').dirty || appointmentFormGroup.get('animal').touched)">
+          <p *ngIf="appointmentFormGroup.get('animal').errors.required">Name is required</p>
+        </div>
+      </div>
+
+      <div class="form-group" [class.disabled]="!checkStatus('CREATED')">
+        <label [class.disabled]="!checkStatus('CREATED')">Data programarii</label>
+        <mat-form-field style="width: 100%; margin-top: -20px; margin-bottom: -20px" class="example-full-width" appearance="fill; white">
+          <input placeholder="MM/DD/YYYY - click here" matInput  [matDatepicker]="picker" (click)="openPicker(picker)" formControlName="data" autocomplete="off" [disabled]="!checkStatus('CREATED')">
+          <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="error"
+             *ngIf="appointmentFormGroup.get('data').invalid && (appointmentFormGroup.get('data').dirty || appointmentFormGroup.get('data').touched)">
+          <p *ngIf="appointmentFormGroup.get('data').errors.required">Date is required</p>
+        </div>
+      </div>
+
+      <div class="form-group" [class.disabled]="!checkStatus('CREATED')">
+        <label [class.disabled]="!checkStatus('CREATED')">Ora programarii</label>
+        <input placeholder="Ora - format 24hr - click here" [ngxTimepicker]="fullTime" [format]="24" formControlName="hour" [disabled]="!checkStatus('CREATED')">
+        <ngx-material-timepicker #fullTime [enableKeyboardInput]="true" ></ngx-material-timepicker>
+        <div class="error"
+             *ngIf="appointmentFormGroup.get('hour').invalid && (appointmentFormGroup.get('hour').dirty || appointmentFormGroup.get('hour').touched)">
+          <p *ngIf="appointmentFormGroup.get('hour').errors.required">Hour is required</p>
+        </div>
+      </div>
+
+      <div class="form-group" [class.disabled]="!checkStatus('CREATED')">
+        <label [class.disabled]="!checkStatus('CREATED')">Numele doctorului</label>
+        <input formControlName="doc" placeholder="Doctor" [readOnly]="!checkStatus('CREATED')"/>
+        <div class="error"
+             *ngIf="appointmentFormGroup.get('doc').invalid && (appointmentFormGroup.get('doc').dirty || appointmentFormGroup.get('doc').touched)">
+          <p *ngIf="appointmentFormGroup.get('doc').errors.required">Doctor name is required</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="right-align">
+          <button class="btn" type="submit" [disabled]="appointmentFormGroup.invalid">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
+

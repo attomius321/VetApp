@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppointmentListComponent} from "./sidenav/appointment-list/appointment-list.component";
 import {AppointmentRegistrationComponent} from "./sidenav/appointment-registration/appointment-registration.component";
 import {AppointmentDetailsComponent} from "./sidenav/appointment-details/appointment-details.component";
@@ -25,6 +25,12 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 import {AppointmentHistoryComponent} from "./sidenav/appointment-registration/appointment-history/appointment-history.component";
+import { ToolbarComponent } from './dumb-components/toolbar/toolbar.component';
+import { ParalelogComponent } from './dumb-components/paralelog/paralelog.component';
+import { SidenavListComponent } from './sidenav/sidenav-list/sidenav-list.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import {ChartsModule} from "ng2-charts";
+import { AppointmentsTimeComponent } from './statistics/appointments-time/appointments-time.component';
 
 
 @NgModule({
@@ -35,7 +41,12 @@ import {AppointmentHistoryComponent} from "./sidenav/appointment-registration/ap
     SidenavComponent,
     AppointmentTableComponent,
     ArraySortPipe,
-    AppointmentHistoryComponent
+    AppointmentHistoryComponent,
+    ToolbarComponent,
+    ParalelogComponent,
+    SidenavListComponent,
+    StatisticsComponent,
+    AppointmentsTimeComponent
   ],
     imports: [
         CommonModule,
@@ -54,7 +65,9 @@ import {AppointmentHistoryComponent} from "./sidenav/appointment-registration/ap
         MatDatepickerModule,
         MatNativeDateModule,
         MatSelectModule,
-        NgxMaterialTimepickerModule
+        NgxMaterialTimepickerModule,
+        ReactiveFormsModule,
+        ChartsModule
     ],
   providers: [AppointmentServiceProvider, NavigationServiceProvider]
 })

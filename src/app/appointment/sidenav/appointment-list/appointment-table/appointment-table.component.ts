@@ -37,15 +37,15 @@ export class AppointmentTableComponent implements OnInit {
   }
 
   isCreated(status: string){
-    return status === "CREATA";
+    return status === "CREATED";
   }
 
   isConfirmed(status: string){
-    return status === "CONFIRMATA";
+    return status === "CONFIRMED";
   }
 
   hasEnded(status: string){
-    return status === "INCHEIATA";
+    return status === "DONE";
   }
 
   goToAppointment(appointment: Appointment){

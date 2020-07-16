@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {INavigationService, NAVIGATION_SERVICE} from "../../../services/navigation/navigation.service";
+import {INavigationService, NAVIGATION_SERVICE} from "../../../../services/navigation/navigation.service";
 
 @Component({
   selector: 'app-toolbar',

@@ -1,0 +1,11 @@
+.paralelog{
+  position: fixed;
+  z-index: -10;
+  top:0%;
+  width: 3000px;
+  height: 1000px;
+  display: inline-block;
+  background: #e0e0e0;
+  transform: skewX(-75deg);
+  opacity: 0.2;
+}

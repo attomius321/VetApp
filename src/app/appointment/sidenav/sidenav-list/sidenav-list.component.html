@@ -1,0 +1,8 @@
+<mat-nav-list style="margin-top: 7px">
+  <div style="display: flex; align-items: center; justify-content: center"><h1>Meniu</h1></div>
+  <a mat-list-item disabled style="background-color: lightgray; border-bottom: 1px solid lightgray; border-top: 1px solid lightgray;"><div *ngIf="auth.user$ | async as user">
+    <i style="margin-top: -2px" class="left material-icons">account_circle</i>Dr.{{user.displayName}}
+  </div></a>
+  <a mat-list-item [routerLink]="'/appointments/statistics'"><i style="margin-right: 15px" class="material-icons">insert_chart</i>Statistics </a>
+  <a mat-list-item (click)="auth.signOut()" [routerLink]="'/home'"><i style="margin-right: 15px" class="material-icons">exit_to_app</i>Log out </a>
+</mat-nav-list>

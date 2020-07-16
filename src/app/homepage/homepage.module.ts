@@ -6,10 +6,13 @@ import {HomepageRoutingModule} from "./homepage-routing.module";
 
 
 @NgModule({
-  declarations: [HomepageComponent],
-  imports: [
-    CommonModule,
-    HomepageRoutingModule
-  ]
+    declarations: [HomepageComponent],
+    exports: [
+        HomepageComponent
+    ],
+    imports: [
+        CommonModule,
+        HomepageRoutingModule
+    ]
 })
 export class HomepageModule { }

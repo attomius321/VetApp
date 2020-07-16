@@ -23,4 +23,5 @@ export class TimeConverterService {
     let date = new Date(unix);
     return `${date.getHours()}:${date.getMinutes()}`;
   }
+
 }

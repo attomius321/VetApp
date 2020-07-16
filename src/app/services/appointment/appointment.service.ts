@@ -12,7 +12,7 @@ import {ToastrModule, ToastrService} from "ngx-toastr";
 
 export interface IAppointmentService {
 
-  getAppointments();
+  getAppointments(): Observable<Array<Appointment>>;
 
   getAppointmentById(id: string);
 
@@ -46,7 +46,7 @@ export class AppointmentService implements IAppointmentService{
     );
   }
 
-  getAppointments(){
+  getAppointments(): Observable<Array<Appointment>>{
     return this.appointments;
   }
 

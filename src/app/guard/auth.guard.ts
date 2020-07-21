@@ -3,7 +3,6 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Route
 import { Observable } from 'rxjs';
 import {AuthService} from "../services/auth/auth.service";
 import {map, take, tap} from "rxjs/operators";
-import {loggedIn} from "@angular/fire/auth-guard";
 import {ToastrService} from "ngx-toastr";
 
 @Injectable({

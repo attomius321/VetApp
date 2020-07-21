@@ -5,6 +5,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import {Observable} from "rxjs";
 import {Appointment} from "../../../entities/appointment.model";
 import {map} from "rxjs/operators";
+import {PieChartService} from "../../../services/chart-creator/pie-chart.service";
 
 
 @Component({
@@ -18,32 +19,10 @@ export class DoneRatioComponent implements OnInit {
   private doneApp: number = 0;
   private inProgressApp: number = 0;
 
-  public pieChartOptions: ChartOptions = {
-    responsive: true,
-    legend: {
-      position: 'top',
-    },
-    plugins: {
-      datalabels: {
-        formatter: (value, ctx) => {
-          const label = ctx.chart.data.labels[ctx.dataIndex];
-          return label;
-        },
-      },
-    }
-  };
-  public pieChartLabels: Label[] = [['Done appointments'], ['In progress appointments']];
-  public pieChartData: number[] = [];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [pluginDataLabels];
-  public pieChartColors = [
-    {
-      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
-    },
-  ];
-
-  constructor() { }
+  constructor(public pieCreator: PieChartService) {
+    this.pieCreator = new PieChartService();
+    this.pieCreator.pieChartLabels = [['Done appointments'], ['In progress appointments']];
+  }
 
   ngOnInit(): void {
     this.appointments.pipe(
@@ -57,7 +36,7 @@ export class DoneRatioComponent implements OnInit {
             this.inProgressApp++;
           }
         }
-        this.pieChartData = [this.doneApp, this.inProgressApp];
+        this.pieCreator.pieChartData = [this.doneApp, this.inProgressApp];
       }
     )
   }

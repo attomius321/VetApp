@@ -30,6 +30,19 @@ h1.example-app-name {
   flex: 1 0 auto;
 }
 
-a {
+.mat-toolbar.mat-primary {
+  background: #212121;
+  color: #fff;
+}
 
+.example-toolbar {
+  display: flex;
+}
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+.flex-center {
+  justify-content: center;
 }

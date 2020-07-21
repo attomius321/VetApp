@@ -6,11 +6,11 @@ import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
 
 @Component({
-  selector: 'app-appointments-time',
-  templateUrl: './appointments-time.component.html',
+  selector: 'app-time-ratio',
+  templateUrl: './time-ratio.component.html',
   styleUrls: ['./time-ratio.component.css']
 })
-export class AppointmentsTimeComponent implements OnInit {
+export class TimeRatioComponent implements OnInit {
 
   @Input() appointments: Observable<Array<Appointment>>;
   myArray: Array<number> = [0,0,0,0,0,0,0,0,0,0,0,0];

@@ -88,9 +88,15 @@ export class AppointmentDetailsComponent implements OnInit {
 
   checkDiagnostic(){
     if (this.appointmentFormGroup.get('diagnostic').value === ''){
-      this.appointmentFormGroup.patchValue({
-        status: 'CONFIRMED'
-      });
+      if(this.appointmentFormGroup.get('status').value == 'CONFIRMED'){
+        this.appointmentFormGroup.patchValue({
+          status: 'CONFIRMED'
+        });
+      }else {
+        this.appointmentFormGroup.patchValue({
+          status: 'CREATED'
+        });
+      }
       return true;
     }
   }

@@ -1,2 +1,12 @@
 <app-toolbar></app-toolbar>
-<app-appointments-time [appointments]="appointments"></app-appointments-time>
+  <div class="container">
+    <button class="btn" (click)="selectStatus(0)">Incarcarea in timp a programarilor</button>
+    <button class="btn" (click)="selectStatus(2)">Distributia animalelor in timp</button>
+    <button class="btn" (click)="selectStatus(1)">Raport programari incheiate</button>
+  </div>
+  <div class="row">
+    <div class="col s12" *ngIf="checkStatus(0)"><app-time-ratio [appointments]="appointments"></app-time-ratio></div>
+    <div class="col s12" *ngIf="checkStatus(1)"><app-done-ratio [appointments]="appointments"></app-done-ratio></div>
+    <div class="col s12" *ngIf="checkStatus(2)"><app-animals-ratio [appointments]="appointments"></app-animals-ratio></div>
+  </div>
+

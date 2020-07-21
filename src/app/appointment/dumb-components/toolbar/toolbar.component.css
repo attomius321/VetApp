@@ -1,0 +1,14 @@
+.mat-toolbar.mat-primary {
+  background: #212121;
+  color: #fff;
+}
+
+button {
+  background-color: black;
+  border-radius: 200px
+}
+
+button:hover {
+  background-color: #e0e0e0;
+  color: black;
+}

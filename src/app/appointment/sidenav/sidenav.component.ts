@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {MediaMatcher} from "@angular/cdk/layout";
 import {AuthService} from "../../services/auth/auth.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-sidenav',

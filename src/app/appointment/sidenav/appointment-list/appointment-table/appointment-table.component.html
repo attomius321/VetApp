@@ -24,7 +24,8 @@
 
     <ng-container matColumnDef="unix" >
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Data si ora</th>
-      <td mat-cell *matCellDef="let appointment"> {{appointment.unix | date: 'yyyy-MM-dd | HH:mm'}} </td>
+      <td mat-cell *matCellDef="let appointment"> {{appointment.unix | date: 'yyyy-MM-dd | HH:mm'}}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="diagnostic" >
@@ -34,7 +35,18 @@
 
     <ng-container matColumnDef="Edit" >
       <th mat-header-cell *matHeaderCellDef>Edit</th>
-      <td mat-cell *matCellDef="let appointment"><button class="btn" (click)="goToAppointment(appointment)">Edit</button></td>
+      <td mat-cell *matCellDef="let appointment">
+        <button class="btn" (click)="goToAppointment(appointment)">Edit</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Delete" >
+      <th mat-header-cell *matHeaderCellDef>Delete</th>
+      <td mat-cell *matCellDef="let appointment">
+        <div *ngIf="appointment.status == 'DONE'">
+          <button class="btn" style="background-color: darkred" (click)="deleteAppointment(appointment)">Delete</button>
+        </div>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

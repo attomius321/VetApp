@@ -1,14 +1,15 @@
-<div style="width: 90%; height: 0;">
+<div>
   <div>
     <div class="chart">
       <canvas baseChart
-              [data]="pieChartData"
-              [labels]="pieChartLabels"
-              [chartType]="pieChartType"
-              [options]="pieChartOptions"
-              [plugins]="pieChartPlugins"
-              [colors]="pieChartColors"
-              [legend]="pieChartLegend">
+              height="100%"
+              [data]="pieCreator.pieChartData"
+              [labels]="pieCreator.pieChartLabels"
+              [chartType]="pieCreator.pieChartType"
+              [options]="pieCreator.pieChartOptions"
+              [plugins]="pieCreator.pieChartPlugins"
+              [colors]="pieCreator.pieChartColors"
+              [legend]="pieCreator.pieChartLegend">
       </canvas>
     </div>
   </div>

@@ -5,6 +5,8 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {APPOINTMENT_SERVICE, IAppointmentService} from "../../../../services/appointment/appointment.service";
 import {INavigationService, NAVIGATION_SERVICE} from "../../../../services/navigation/navigation.service";
+import {TimeConverterService} from "../../../../services/time-convertor/time-convertor.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-appointment-table',
@@ -14,7 +16,7 @@ import {INavigationService, NAVIGATION_SERVICE} from "../../../../services/navig
 export class AppointmentTableComponent implements OnInit {
 
   dataSource: MatTableDataSource<Appointment>
-  displayedColumns: Array<string> = ['animal','doc','unix','status','diagnostic','Edit'];
+  displayedColumns: Array<string> = ['animal','doc','unix','status','diagnostic','Edit', 'Delete'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -46,6 +48,10 @@ export class AppointmentTableComponent implements OnInit {
 
   hasEnded(status: string){
     return status === "DONE";
+  }
+
+  deleteAppointment(appointment: Appointment){
+    this.fb.deleteAppointment(appointment);
   }
 
   goToAppointment(appointment: Appointment){

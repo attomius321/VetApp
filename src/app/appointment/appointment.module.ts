@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppointmentListComponent} from "./sidenav/appointment-list/appointment-list.component";
 import {AppointmentRegistrationComponent} from "./sidenav/appointment-registration/appointment-registration.component";
@@ -30,7 +30,9 @@ import { ParalelogComponent } from './dumb-components/paralelog/paralelog.compon
 import { SidenavListComponent } from './sidenav/sidenav-list/sidenav-list.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import {ChartsModule} from "ng2-charts";
-import { AppointmentsTimeComponent } from './statistics/appointments-time/appointments-time.component';
+import { TimeRatioComponent } from './statistics/time-ratio/time-ratio.component';
+import { AnimalsRatioComponent } from './statistics/animals-ratio/animals-ratio.component';
+import { DoneRatioComponent } from './statistics/done-ratio/done-ratio.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { AppointmentsTimeComponent } from './statistics/appointments-time/appoin
     ParalelogComponent,
     SidenavListComponent,
     StatisticsComponent,
-    AppointmentsTimeComponent
+    TimeRatioComponent,
+    AnimalsRatioComponent,
+    DoneRatioComponent
   ],
     imports: [
         CommonModule,

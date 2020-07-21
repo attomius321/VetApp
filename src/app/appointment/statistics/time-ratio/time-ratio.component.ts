@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 @Component({
   selector: 'app-appointments-time',
   templateUrl: './appointments-time.component.html',
-  styleUrls: ['./appointments-time.component.css']
+  styleUrls: ['./time-ratio.component.css']
 })
 export class AppointmentsTimeComponent implements OnInit {
 

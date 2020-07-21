@@ -1,16 +1,16 @@
 <div class="overlay">
   <div class="back">
     <div class="container">
-      <h1>VetApp</h1>
+      <h1>{{title}}</h1>
       <h6>Please log in to see your appointments</h6>
       <div *ngIf="auth.user$ | async as user; else login">
-        {{user.displayName}}
-        <button class="button" (click)="auth.signOut()">Sign Out</button>
+        <button class="btn" (click)="auth.signOut()">Sign Out</button>
+        <button class="btn" (click)="goToAppointments()">To appointments</button>
       </div>
       <ng-template #login>
-        <button class="button" (click)="auth.googleSignIn()">Login with Google</button>
-        <button class="button" (click)="auth.signUp('Topo', 'topolniceanutony@yahoo.com', 'Mettin2')">Sign Up</button>
-        <button class="button" (click)="auth.signIn('topolniceanutony@yahoo.com', 'Mettin2')">Sign in</button>
+        <button class="btn" (click)="auth.googleSignIn()">Login with Google</button>
+        <button class="btn" (click)="auth.signUp('Nicky Heis', 'nicky.heis@gmail.com', 'qwerty')">Sign Up</button>
+        <button class="btn" (click)="auth.signIn('nicky.heis@gmail.com', 'qwerty')">Sign in</button>
       </ng-template>
     </div>
   </div>

@@ -1,5 +1,6 @@
-import {Injectable, InjectionToken, Provider} from '@angular/core';
+import {Inject, Injectable, InjectionToken, Provider} from '@angular/core';
 import {Router} from "@angular/router";
+import {APPOINTMENT_SERVICE, IAppointmentService} from "../appointment/appointment.service";
 
 export interface INavigationService {
   openNewAppointment(): Promise<boolean>;
@@ -10,7 +11,8 @@ export interface INavigationService {
 @Injectable()
 export class NavigationService implements INavigationService{
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              @Inject(APPOINTMENT_SERVICE) private appointmentService: IAppointmentService) { }
 
   openNewAppointment(): Promise<boolean> {
     return this.router.navigate(['appointments','add']);

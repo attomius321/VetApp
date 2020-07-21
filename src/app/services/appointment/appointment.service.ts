@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 import DocumentReference = firebase.firestore.DocumentReference;
 import {ajaxPost} from "rxjs/internal-compatibility";
 import {map} from "rxjs/operators";
-import {ToastrModule, ToastrService} from "ngx-toastr";
+import {ToastrService} from "ngx-toastr";
 
 
 export interface IAppointmentService {
@@ -74,14 +74,18 @@ export class AppointmentService implements IAppointmentService{
   }
 
   deleteAppointment(appointment){
-    this.firestore.doc('appointments/' + appointment.id).delete();
+    this.firestore.doc('appointments/' + appointment.id).delete().then(
+      res => {
+        this.toastr.success("Programare stearsa cu succes!");
+      }
+    );
   }
 
   updateAppointment(appointment: Appointment, id: string){
     delete appointment.id;
     this.firestore.doc('appointments/' + id).update(appointment).then(
       res => {
-        this.toastr.success("Programare editata cu succes!")
+        this.toastr.success("Programare editata cu succes!");
       },
     );
   }

@@ -6,6 +6,7 @@ import {User} from "../../entities/user.model";
 import {Observable, of} from "rxjs";
 import {switchMap} from "rxjs/operators";
 import {auth} from "firebase";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class AuthService{
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ){
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -32,27 +34,31 @@ export class AuthService{
   async signUp(name: string, email: string, password: string){
     await this.afAuth.createUserWithEmailAndPassword(email, password)
       .then(result => {
+        this.toastr.success("Cont creat cu succes!");
         return result.user.updateProfile({
           displayName: name
         })
       }).catch(err => {
-        console.log(err);
+        this.toastr.error("Error: Adresa de email este deja utilizata!");
       });
   }
 
   async signIn(email, password){
     const credential = await this.afAuth.signInWithEmailAndPassword(email, password);
+    this.toastr.success("Ati fost logat cu succes!")
     return this.updateUserData(credential.user) && this.router.navigate(['/appointments']);
   }
 
   async googleSignIn(){
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
+    this.toastr.success("Ati fost logat cu succes!")
     return this.updateUserData(credential.user) && this.router.navigate(['/appointments']);
   }
 
   async signOut() {
     await this.afAuth.signOut();
+    this.toastr.warning("Ati fost delogat cu succes!")
     return this.router.navigate(['/'])
   }
 

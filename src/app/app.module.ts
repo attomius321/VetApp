@@ -14,6 +14,7 @@ import {AngularFireAuthModule} from "@angular/fire/auth";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     AppointmentModule,
     HomepageModule,
     MatProgressSpinnerModule,
+    HttpClientModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]

@@ -25,12 +25,7 @@ export class AppointmentTableComponent implements OnInit {
               @Inject(NAVIGATION_SERVICE) private navService: INavigationService) { }
 
   ngOnInit(): void {
-    this.fb.getAppointments().subscribe(data =>
-      {
-        this.dataSource = new MatTableDataSource<Appointment>(data);
-        this.dataSource.sort = this.sort;
-      }
-    )
+    this.getAppointments();
   }
 
   applyFilter(event: Event){
@@ -50,8 +45,18 @@ export class AppointmentTableComponent implements OnInit {
     return status === "DONE";
   }
 
+  getAppointments(){
+    this.fb.getAppointments().subscribe(data =>
+      {
+        this.dataSource = new MatTableDataSource<Appointment>(data);
+        this.dataSource.sort = this.sort;
+      }
+    )
+  }
+
   deleteAppointment(appointment: Appointment){
     this.fb.deleteAppointment(appointment);
+    this.getAppointments();
   }
 
   goToAppointment(appointment: Appointment){

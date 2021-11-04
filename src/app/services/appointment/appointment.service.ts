@@ -8,7 +8,9 @@ import DocumentReference = firebase.firestore.DocumentReference;
 import {ajaxPost} from "rxjs/internal-compatibility";
 import {map} from "rxjs/operators";
 import {ToastrService} from "ngx-toastr";
+import { HttpClient } from '@angular/common/http';
 
+const baseUrl = 'http://localhost:8080/api/appointments';
 
 export interface IAppointmentService {
 
@@ -34,24 +36,16 @@ export class AppointmentService implements IAppointmentService{
   appointmentsCollection: AngularFirestoreCollection<Appointment>
 
   constructor(private firestore: AngularFirestore,
-              private toastr: ToastrService) {
-    this.appointmentsCollection = firestore.collection<Appointment>('appointments', ref => ref.orderBy('unix', 'desc'));
-    this.appointments = this.appointmentsCollection.snapshotChanges().
-    pipe(
-      map(actions => actions.map(a => {
-        const data = (a.payload.doc.data() as Appointment);
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
+              private toastr: ToastrService,
+              private http: HttpClient) {
   }
 
   getAppointments(): Observable<Array<Appointment>>{
-    return this.appointments;
+      return this.http.get<Appointment[]>(baseUrl);
   }
 
   getAppointmentById(id: string){
-    return this.firestore.collection('appointments').doc(id).valueChanges();
+    return this.http.get(`${baseUrl}/${id}`);
   }
 
   getAppointmentsByAnimal(animal: string){
@@ -59,34 +53,36 @@ export class AppointmentService implements IAppointmentService{
   }
 
   createAppointment(appointment: Appointment){
-    const param = JSON.parse(JSON.stringify(appointment));
-    return new Promise<any>((resolve, reject) =>{
-      this.firestore
-        .collection('appointments')
-        .add(param)
-        .then(res => {
-          this.toastr.success("Programare adaugata cu succes!")
-        },
-              err => {
-            reject(err),
-            this.toastr.error("Adaugare esuata!")});
-    });
+    return this.http.post(baseUrl, appointment).subscribe(
+      res => {
+        this.toastr.success("Programare adaugata cu succes!");
+      },
+      error => {
+        this.toastr.error("Programare a esuat!");
+      }
+    )
   }
 
   deleteAppointment(appointment){
-    this.firestore.doc('appointments/' + appointment.id).delete().then(
+    return this.http.delete(`${baseUrl}/${appointment.id}`).subscribe(
       res => {
         this.toastr.success("Programare stearsa cu succes!");
+      },
+      error => {
+        this.toastr.error("Delete failed!");
       }
     );
+
   }
 
   updateAppointment(appointment: Appointment, id: string){
-    delete appointment.id;
-    this.firestore.doc('appointments/' + id).update(appointment).then(
+    return this.http.put(`${baseUrl}/${id}`, appointment).subscribe(
       res => {
         this.toastr.success("Programare editata cu succes!");
       },
+      error => {
+        this.toastr.error("Update failed")
+      }
     );
   }
 

@@ -1,7 +1,18 @@
-# For Irian
+# Client Side
 
-Authentication is mocked, simply press Sign in and it will redirect you to appointments page with all credentials.
+in /VETAPP
 
+npm i 
+
+ng serve
+
+# Server Side
+
+cd /VETAPP/server
+
+npm i
+
+npm run start
 
 # VetApp
 

@@ -5,26 +5,33 @@ const Appointment = db.appointments;
 // Create and Save a new Appointment
 exports.create = (req, res) => { 
       // Create an Appointment
-      const appointment = new Appointment({
-        animal: req.body.animal,
-        unix: req.body.unix,
-        doc: req.body.doc,
-        diagnostic: req.body.diagnostic,
-        status: req.body.status
-      });
-    
-      // Save Appointment in the database
-      appointment
-        .save(appointment)
-        .then(data => {
-          res.send(data);
-        })
-        .catch(err => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the Appointment."
-          });
+      if(req && req.body && req.body.animal){
+        const appointment = new Appointment({
+          animal: req.body.animal,
+          unix: req.body.unix,
+          doc: req.body.doc,
+          diagnostic: req.body.diagnostic,
+          status: req.body.status
         });
+      
+        // Save Appointment in the database
+        appointment
+          .save(appointment)
+          .then(data => {
+            res.send(data);
+          })
+          .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occurred while creating the Appointment."
+            });
+          });
+      } else {
+        res.status(500).send({
+          message: "Should have at least name",
+        })
+      }
+      
 };
 
 // Retrieve all Appointments from the database.
@@ -102,5 +109,9 @@ exports.delete = (req, res) => {
 
 // Delete all Appointments from the database.
 exports.deleteAll = (req, res) => {
-  
+    Appointment.deleteMany().then(data => {
+      res.send({
+        message: "Appointments deleted!"
+      })
+    });
 };

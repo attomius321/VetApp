@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node .",
-    "test": "jest"
+    "test": "./node_modules/.bin/jasmine-node spec"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +13,10 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "jasmine-node": "^3.0.0",
+    "jest": "^27.4.5",
     "mongodb": "^4.1.4",
-    "mongoose": "^6.0.12"
+    "mongoose": "^6.0.12",
+    "supertest": "^6.1.6"
   }
 }

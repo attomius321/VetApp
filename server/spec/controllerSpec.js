@@ -59,6 +59,13 @@ describe("Vet App Server", function() {
             })
         })
 
+        it("should not return appointment by id", function(done) {
+            request.get("http://localhost:8080/api/appointments/" + id2, function(error, response, body) {
+                expect(JSON.parse(body).message).toBe("Not found Appointment with id "+id2);
+                done();
+            })
+        })
+
         it("should update appointment", function(done) {
             request.put("http://localhost:8080/api/appointments/" + id, {json: {animal: "Pisica"}}, function(error, response, body) {
                 expect(body.message).toBe("Appointment was updated successfully.");
